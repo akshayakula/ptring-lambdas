@@ -2,50 +2,9 @@ import { Client, Environment, ApiError } from "square";
 import  AWS from 'aws-sdk';
 import crypto from 'crypto';
 
-const test_body = {
-  "body": {
-    "merchant_id": "C337NFWQT2A6W",
-    "type": "loyalty.account.updated",
-    "event_id": "3ca83966-230e-4a61-8484-22ea749ea765",
-    "created_at": "2020-05-13T01:46:58.794Z",
-    "data": {
-        "type": "loyalty",
-        "id": "ba2f8ab6-e131-46d9-9882-17714404eb49",
-        "object": {
-            "loyalty_account": {
-                "balance": 300,
-                "created_at": "2020-05-13T01:41:34Z",
-                "customer_id": "QPTXM8PQNX3Q726ZYHPMNP46XC",
-                "enrolled_at": "2020-05-13T01:41:34Z",
-                "id": "ba2f8ab6-e131-46d9-9882-17714404eb49",
-                "lifetime_points": 10,
-                "mapping": {
-                    "created_at": "2020-05-13T01:41:34Z",
-                    "id": "664c22ba-9460-45a5-8917-381ae72dcfdc",
-                    "phone_number": "+14155551234"
-                },
-                "program_id": "5216e8b2-d43e-41e2-9ed8-eccf3e892aef",
-                "updated_at": "2020-05-13T01:41:34Z"
-            }
-        }
-    }
-  }
-}
-
 export const handler = async (event) => {
-  // console.log(event)
 
   const ddb = new AWS.DynamoDB.DocumentClient();
-
-  async function listTables() {
-    const dynamoDB = new AWS.DynamoDB();
-    try {
-        const data = await dynamoDB.listTables({}).promise();
-        console.log("Table names in DynamoDB:", data.TableNames);
-    } catch (err) {
-        console.log("Error", err);
-    }
-  }
   
   async function getMerchantToken(merchant_id) {
     const dynamoDB = new AWS.DynamoDB.DocumentClient();

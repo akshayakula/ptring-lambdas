@@ -1,8 +1,6 @@
 import { Client, Environment, ApiError } from "square";
 import  AWS from 'aws-sdk';
 
-const sandbox_token = 'EAAAELL3wd7h_zKGxrioFmbWqNTJ6qg75fUin2-UA2yptKTy3PYd70PLpWkqfKBA'
-
 const client = new Client({
   bearerAuthCredentials: {
     accessToken: sandbox_token
